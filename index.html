@@ -1,0 +1,224 @@
+---
+layout: default
+title: Home
+description: Simple documentation template for Github pages
+isHome: true
+---
+
+<div class="jumbotron">
+  <h1 class="display-4">Variability Modeling Language</h1>
+  <p class="lead">Variability Modeling Language focuses on abstracting the variability realized in the code artifacts of
+    a <a href="https://en.wikipedia.org/wiki/Software_product_line">software product line</a>.
+    It captures and models the reusable structure of the code assets themselves.
+    This is based on abstracting the used variability implementation techniques coming
+    from object-oriented or functional programming, such as inheritance, overloading, or software design patterns.
+    <!--It is based on abstracting the used variability implementation techniques coming
+    from object-oriented or functional programming, such as inheritance, overloading, or software design patterns.
+    Thus, -->
+    <!--instead of refactoring or annotating the code in terms of features, -->
+    <!-- it captures and models the reusable
+    structure of the code assets themselves. --> <!--, which can be traced to features. -->
+  </p>
+  <hr class="my-4">
+  <p> This language is based on a <a id="bibliography">research work</a> on understanding the variability
+    implementation approaches.</p>
+  <!--<p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>-->
+</div>
+
+
+
+
+<section class="bs-docs-section">
+  <h1 id="overview" class="page-header">Overview</h1>
+
+  The Variability Modeling Language (VML) is a domain specific language (DSL), realized in Scala language.
+  In the following, it will be referred as VML-DSL.
+  Here are presented its main language constructs and a usage example.
+
+  <!--<blockquote>
+    This is a Jekyll template I use for my GitHub projects documentations. It is heavily based on official Bootstrap
+    documentation and is designed to be quickly deployed.
+  </blockquote> -->
+  <p></p>
+  <h1 id="download" class="page-header">Download</h1>
+  <!--You can choose to take only the JAR of this language, and to use in your software product line.
+  Or, to take its source, which comes with three illustrative software product lines. -->
+    <p>You can download the VML-DSL in one of these two options. </p>
+    <ul>
+    <li>The JAR file: <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_01.jar</a> </li>
+    <li>The source with SPL examples: <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_02.jar</a> </li>
+  </ul>
+  <p>In case that you take the source of the VML-DSL then it is important to know that it is an IntelliJ (2018.2.1)
+    project. This means that to use it easily you should install
+    <a href="https://www.jetbrains.com/idea/download/#section=windows">IntelliJ</a>. </p>
+
+
+  <p> </p>
+  <h1 id="usage" class="page-header">Usage</h1>
+
+  <h3 class="page-header3">Language concepts</h3>
+
+    By using the VML-DSL you can model the variability of code assets in terms of
+    <code class="highlighter-blue">variation points</code> with
+    <code class="highlighter-blue">variants</code> in a technical variability model
+    <code class="highlighter-blue">tvm</code>. According to their definition,
+   <ul>
+       <li><code class="highlighter-blue">variation point</code>identifies one or more locations at which the variation will occur. </li>
+       <li><code class="highlighter-blue">variants</code> express the way that a
+           <code class="highlighter-blue">variation point</code> is going to vary.</li>
+       <li><code class="highlighter-blue">tvm</code> stands for technical variability model, which consists of two parts:
+         <ol type="1">
+              <li>The captured abstractions of <code class="highlighter-blue">variation points</code> with
+                <code class="highlighter-blue">variants</code>
+                 that are associated with the variable elements in
+                reusable code assets, and</li>
+              <!--<li>The documented variability in a <code class="highlighter-purple">fragment</code> construct</li>-->
+               <!--<li> the abstractions of <code class="highlighter-blue">variation point</code> with
+                   <code class="highlighter-blue">variants</code>,</li>
+               <li> their tags for keeping the consistency with the variable elements in code assets, and </li>-->
+               <li> The described dependencies of <code class="highlighter-blue">variation point</code>
+                   with <code class="highlighter-blue">variants</code> with their characteristic properties,
+                   such as <code class="highlighter-purple">logical relation</code>,
+                   <code class="highlighter-purple">binding time</code>,
+                   and <code class="highlighter-purple">evolution</code> properties, using the
+                 <code class="highlighter-red">fragment</code> construct.</li>
+         </ol>
+       </li>
+   </ul>
+
+  <h3 class="page-header3">Usage pattern</h3>
+
+  <p>
+    The VML-DSL can be used to model the variability of an SPL implemented in Java or Scala language.
+    In the following is shown its usage for modeling the variability of an SPL example implemented in Scala.
+  </p>
+
+  <p>To set up the VML-DSL</p>
+  <ol>
+    <li>Add <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_01.jar</a>
+      to the dependencies of your SPL project, for example, in
+      <a href="https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project">IntelliJ</a> or
+      <a href="https://stackoverflow.com/questions/3280353/how-to-import-a-jar-in-eclipse">Eclipse.</a></li>
+    <li>Create a package named, for examle, <code>tvm</code> in your SPL project, which will hold the modeled variability.</li>
+    <li>Then, for each subdomain, of your choice, you can create a new <em>tvm_x.scala</em> class, to hold its variability.</li>
+  </ol>
+
+  <p>Or, alternatively, to steps 2 and 3, the VML-DSL just can be imported into the current scope, for example, package,
+    file, or class, where variability needs to be separately documented into a <code class="highlighter-blue">tvm</code>. </p>
+  <p>Despite of the chosen way, here is the pattern for using the VML-DSL: </p>
+
+
+
+  <!-- @formatter:off -->
+  {% highlight scala %}
+  /* tvm_x.scala */
+  import dsl._
+  import scala.reflect.runtime.universe._
+
+  <vp_name>        := <vp_type>(<tag to the variable asset>)
+  <variant_name>   := Variant(<tag to the variable asset>)
+
+  import dsl.fragment._
+  fragment(<class | file | package name>) {
+      <vp_name> is <logical relation> with_variants (<list of variant_name(s)>)
+      use <technique> with_binding <binding time> and_evolution <evolution>
+  }
+  {% endhighlight %}
+  <!-- @formatter:on -->
+
+
+          <!--<vp_type>                   := <VP | oVP | tVP |nVP>
+          <tag to the variable asset> := asset(<class | method | field>)
+          <vp_name> | <variant_name>  := String
+
+          <logical relation> := <MND | OPT | ALT | MUL>
+          <technique>        := <Inheritance | Overriding | ...>
+          <binding time>     := <Compilation | Start up | Runtime | ...>
+          <evolution>        := <Open | Close>-->
+
+<p>First, in the <em>tvm_x.scala</em> class you need to import the VML-DSL.
+The VML-DSL use the reflection in Scala to tag the variable assets in code, therefore you need to import reflection too.
+You may need to import also the subdomain, specifically the package, or class with variability (not shown here).
+Then,
+</p>
+
+    <p><b>&lt vp_name &gt</b> and <b>&lt variant_name &gt</b> - You need to give names for variation points and
+        variants, respectively. </p>
+    <p><b>&lt vp_type &gt</b> - The VML-DSL supports five types of variation points: </p>
+    <ul>
+      <li><code class="highlighter-red">VP</code> &nbsp;&nbsp;- Ordinary variation point</li>
+      <li><code class="highlighter-red">uVP</code> - Unimplemented variation point</li>
+      <li><code class="highlighter-red">oVP</code> - Optional variation point</li>
+      <li><code class="highlighter-red">tVP</code> - Technical variation point</li>
+      <li><code class="highlighter-red">nVP</code> - Nested variation point</li>
+    </ul>
+    <p><b><code class="highlighter-red">Variant</code> construct</b>: The VML-DSL provides this construct for capturing
+        variants.</p>
+
+    <p><b>&lt tag to the variable asset &gt</b> - The VML-DSL has an <code>asset</code> construct where you can use the
+    reflection in scala to tag the varying <code>class</code>, <code>method</code>, or <code>field</code> in code assets. </p>
+
+    <p><b><code class="highlighter-red">fragment</code> construct</b>:
+        Then, you use the <code class="highlighter-red">fragment</code> to model the variability in terms
+      of the created <code class="highlighter-blue">variation points</code> and
+      <code class="highlighter-blue">variants</code> abstractions.</p>
+
+
+    <p><b>&lt logical relation &gt</b> - There are available the four logical relations among the variants of a variation point: </p>
+              <ul>
+                  <li><code class="highlighter-red">mandatory</code></li>
+                  <li><code class="highlighter-red">optional</code></li>
+                  <li><code class="highlighter-red">alternative</code></li>
+                  <li><code class="highlighter-red">or</code></li>
+              </ul>
+    <p><b>&lt technique &gt</b> - The currently added techniques are (new techniques can be added and used): </p>
+              <ul>
+                  <li><code class="highlighter-red">inheritance</code></li>
+                  <li><code class="highlighter-red">overloading</code></li>
+                  <li><code class="highlighter-red">overriding</code></li>
+                  <li><code class="highlighter-red">strategy</code></li>
+                  <li><code class="highlighter-red">template</code></li>
+              </ul>
+    <p><b>&lt binding time &gt</b> - The supported binding times are: </p>
+              <ul>
+                  <li><code class="highlighter-red">compile_time</code></li>
+                  <li><code class="highlighter-red">runtime</code></li>
+              </ul>
+    <p><b>&lt evolution &gt</b> - There are possible two evolution properties: </p>
+              <ul>
+              <li><code class="highlighter-red">open</code></li>
+              <li><code class="highlighter-red">close</code></li>
+              </ul>
+
+
+    <h3 class="page-header3">Usage example</h3>
+
+    <p>Here is an example of them: </p>
+
+  <!-- @formatter:off -->
+  {% highlight scala %}
+  /* class tvm_x.scala */
+  package tvm
+  import dsl._
+  import SPL._
+  {% endhighlight %}
+  <!-- @formatter:on -->
+
+
+
+  <h1 id="bibliography" class="page-header">Bibliography</h1>
+
+  <ul>
+    <li>[1] Tërnava, Xh., & Collet, P. (2017, September).
+      <em>On the diversity of capturing variability at the implementation level.</em>
+      In the 21st International Systems and Software Product Line Conference-Volume B. ACM Press.</li>
+    <li>[2] Tërnava, Xh., & Collet, P. (2017, May). <em>Tracing imperfectly modular variability in software product line
+      implementation.</em> In International Conference on Software Reuse (pp. 112-120). Springer, Cham. </li>
+  </ul>
+
+
+
+
+  </section>
