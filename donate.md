@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Donate
-permalink: /donate/
+title: Github
+permalink: /github/
 ---
 
-Donate to our site
+Github link
