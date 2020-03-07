@@ -1,7 +1,7 @@
 ---
 layout: pagemod
 title: Syntax
-permalink: /syntax/
+permalink: /vm-dsl/syntax/
 ---
 
 
