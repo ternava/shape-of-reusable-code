@@ -1,18 +1,55 @@
 ---
-layout: page
-title: About
-permalink: /about/
+layout: pagemod
+title: Syntax
+permalink: /syntax/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+### VM-DSL Syntax
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+The VM-DSL language syntax for defining variation points with their variants and modeling the implemented variability of a variability-rich system in terms of them.
 
+```
+<vps-list> ::= <vp> | <vp> <EOL> <vps-list> 
 
-[jekyll-organization]: https://github.com/jekyll
+<variants-list> ::= <variant> | <variant> <EOL> <variants-list> 
+
+<vp> ::= <vp-name> `=' <vp-type> `(' `asset' `(' <tag> `)' `)'
+
+<variant> ::= <variant-name> `=' `Variant' `(' `asset' `(' <tag> `)' `)'
+
+<vp-name> | <variant-name> := "string name"
+
+<vp-type> ::= `VP' | `oVP' | `tVP' | `nVP'
+
+<tag> ::= <class-name> | <method-name> | <field-name>
+
+<fragment> ::= `fragment' `(' <tvm-name> `)' `{' 
+    <vp-name> `is' <logical-relation> `with_variants' `('`{'<variants>`}'`)'
+    `use' <technique> `with_binding' <binding-time> `and_evolution' <evolution> <EOL> 
+`}'
+
+<tvm-name> ::= <class-name> | <file-name> | <package-name> | "string name"
+
+<logical-relation> ::= `MND' | `OPT' | `ALT' | `MUL'
+
+<variants> ::= <variant-name> | <variant-name> `,' <variants> 
+
+<technique> ::= `Inheritance' | `Overloading' | `Strategy_Pattern' |
+                `Template_Pattern' | "etc"
+
+<binding-time> ::= `Compile' | `StartUp' | `Runtime' | "etc"
+
+<evolution> ::= `Open' | `Close'
+```
+
+The VM-DSL language syntax for defining trace links between variation points and variants at the implemenetation to features at the specification.
+
+```
+<trace-links> ::= `traces' `{' <links> `}'
+
+<links> ::= <vp-name> `implements' <feature-name> | 
+            <variant-name> `implements' <feature-name>
+
+<vp-name> | <variant-name> | <feature-name> := "string name"
+```

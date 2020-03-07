@@ -5,12 +5,14 @@ description: Simple documentation template for Github pages
 isHome: true
 ---
 
+<p> </p>
+
 <div class="jumbotron">
-  <h1 class="display-4">Variability Modeling Language</h1>
-  <p class="lead">Variability Modeling Language focuses on abstracting the variability realized in the code artifacts of
-    a <a href="https://en.wikipedia.org/wiki/Software_product_line">software product line</a>.
-    It captures and models the reusable structure of the code assets themselves.
-    This is based on abstracting the used variability implementation techniques coming
+  <!--<h1 class="display-4">Variability Modeling Language</h1>-->
+  <p class="lead"><em>Variability Modeling DSL</em> (VM-DSL) focuses on abstracting the realized variability in the code assets of
+    a variability-rich system</a>.
+    It aims to capture and model the reusable structure of the code assets.
+    The approach is based on abstracting the used variability implementation techniques coming
     from object-oriented or functional programming, such as inheritance, overloading, or software design patterns.
     <!--It is based on abstracting the used variability implementation techniques coming
     from object-oriented or functional programming, such as inheritance, overloading, or software design patterns.
@@ -19,9 +21,10 @@ isHome: true
     <!-- it captures and models the reusable
     structure of the code assets themselves. --> <!--, which can be traced to features. -->
   </p>
+  
   <hr class="my-4">
-  <p> This language is based on a <a id="bibliography">research work</a> on understanding the variability
-    implementation approaches.</p>
+  <p style="color: teal;"> VM-DSL emerged during the research work on <a href="https://en.wikipedia.org/wiki/Software_product_line">software product line engineering</a>, 
+    specifically on understanding the variability implementation approaches of similar software-intensive systems.</p>
   <!--<p class="lead">
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
   </p>-->
@@ -33,37 +36,42 @@ isHome: true
 <section class="bs-docs-section">
   <h1 id="overview" class="page-header">Overview</h1>
 
-  The Variability Modeling Language (VML) is a domain specific language (DSL), realized in Scala language.
-  In the following, it will be referred as VML-DSL.
-  Here are presented its main language constructs and a usage example.
+  Variability Modeling DSL (VML-DSL) is a domain specific language (DSL), realized in Scala language.
+  <!--In the following, it will be referred as VML-DSL. -->
+  Here are presented its main language constructs and an illustrative example of usage.
 
   <!--<blockquote>
     This is a Jekyll template I use for my GitHub projects documentations. It is heavily based on official Bootstrap
     documentation and is designed to be quickly deployed.
   </blockquote> -->
   <p></p>
-  <h1 id="download" class="page-header">Download</h1>
+  <h1 id="download" class="page-header">Availability</h1>
   <!--You can choose to take only the JAR of this language, and to use in your software product line.
   Or, to take its source, which comes with three illustrative software product lines. -->
-    <p>You can download the VML-DSL in one of these two options. </p>
+    <p>The VM-DSL is available for download from <a href="https://github.com/ternava/Variability-CChecking">its Github repository</a>.  </p>
+    <!--<p>You can download the VML-DSL in one of these two options. </p>
     <ul>
     <li>The JAR file: <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_01.jar</a> </li>
     <li>The source with SPL examples: <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_02.jar</a> </li>
-  </ul>
-  <p>In case that you take the source of the VML-DSL then it is important to know that it is an IntelliJ (2018.2.1)
-    project. This means that to use it easily you should install
+  </ul>-->
+  <p>* It is important to know that VM-DSL is an IntelliJ (2018.2.1)
+    project. Therefore to use it easily you should install
     <a href="https://www.jetbrains.com/idea/download/#section=windows">IntelliJ</a>. </p>
 
+  <h1 id="syntax" class="page-header">VM-DSL syntax</h1>
+  <p>The detailed language syntax of VM-DSL is <a href="/syntax/">available</a>. It can be used to realize the VM-DSL using another programming language.</p>
 
   <p> </p>
+  <hr class="my-4">
+
   <h1 id="usage" class="page-header">Usage</h1>
 
   <h3 class="page-header3">Language concepts</h3>
 
-    By using the VML-DSL you can model the variability of code assets in terms of
+    By using the VML-DSL one can model the variability of code assets in a Java-based variability-rich system in terms of
     <code class="highlighter-blue">variation points</code> with
     <code class="highlighter-blue">variants</code> in a technical variability model
-    <code class="highlighter-blue">tvm</code>. According to their definition,
+    <code class="highlighter-blue">tvm</code>. According to their definition:
    <ul>
        <li><code class="highlighter-blue">variation point</code>identifies one or more locations at which the variation will occur. </li>
        <li><code class="highlighter-blue">variants</code> express the way that a
@@ -78,7 +86,7 @@ isHome: true
                <!--<li> the abstractions of <code class="highlighter-blue">variation point</code> with
                    <code class="highlighter-blue">variants</code>,</li>
                <li> their tags for keeping the consistency with the variable elements in code assets, and </li>-->
-               <li> The described dependencies of <code class="highlighter-blue">variation point</code>
+               <li> The described dependencies of <code class="highlighter-blue">variation points</code>
                    with <code class="highlighter-blue">variants</code> with their characteristic properties,
                    such as <code class="highlighter-purple">logical relation</code>,
                    <code class="highlighter-purple">binding time</code>,
@@ -91,22 +99,23 @@ isHome: true
   <h3 class="page-header3">Usage pattern</h3>
 
   <p>
-    The VML-DSL can be used to model the variability of an SPL implemented in Java or Scala language.
-    In the following is shown its usage for modeling the variability of an SPL example implemented in Scala.
+    The VML-DSL can be used to model the variability of a variability-rich system implemented in Java or Scala languages.
+    In the following is shown its usage for modeling the variability of an illustrative system implemented in Scala.
   </p>
 
   <p>To set up the VML-DSL</p>
   <ol>
-    <li>Add <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_01.jar</a>
+    <li>Download the VM-DSL from <a href="https://github.com/ternava/Variability-CChecking">its repository</a> and add it in your project. </li>
+      <!--<li>Add <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_01.jar</a>
       to the dependencies of your SPL project, for example, in
       <a href="https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project">IntelliJ</a> or
-      <a href="https://stackoverflow.com/questions/3280353/how-to-import-a-jar-in-eclipse">Eclipse.</a></li>
+      <a href="https://stackoverflow.com/questions/3280353/how-to-import-a-jar-in-eclipse">Eclipse.</a></li> -->
     <li>Create a package named, for examle, <code>tvm</code> in your SPL project, which will hold the modeled variability.</li>
-    <li>Then, for each subdomain, of your choice, you can create a new <em>tvm_x.scala</em> class, to hold its variability.</li>
+    <li>Then, for each subdomain of your choice, for example, for each package, you can create a new <em>tvm_x.scala</em> class to hold / model its variability.</li>
   </ol>
 
-  <p>Or, alternatively, to steps 2 and 3, the VML-DSL just can be imported into the current scope, for example, package,
-    file, or class, where variability needs to be separately documented into a <code class="highlighter-blue">tvm</code>. </p>
+  <p>Or, alternatively to steps 2 and 3, the VML-DSL can just be imported into the current scope, for example, package,
+    file, or class, where variability needs to be separately abstracted within a <code class="highlighter-blue">tvm</code>. </p>
   <p>Despite of the chosen way, here is the pattern for using the VML-DSL: </p>
 
 
