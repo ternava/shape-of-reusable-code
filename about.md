@@ -53,3 +53,20 @@ The VM-DSL language syntax for defining trace links between variation points and
 
 <vp-name> | <variant-name> | <feature-name> := "string name"
 ```
+
+
+
+### Bibliography
+
+  <ul>
+    <li>[1] Xhevahire Tërnava and Philippe Collet.
+      <em>On the Diversity of Capturing Variability at the Implementation Level.</em>
+      In the 21st International Systems and Software Product Line Conference-Volume B. 2017. ACM Press.</li>
+    <li>[2] Xhevahire Tërnava and Philippe Collet. <em>Tracing Imperfectly Modular Variability in Software Product Line
+      Implementation.</em> In International Conference on Software Reuse. 2017. Springer, Cham. </li>
+    <li>[3] Xhevahire Tërnava and Philippe Collet. 
+    <em>Early Consistency Checking Between Specification and Implementation Variabilities.</em> 
+    In Proceedings of the 21st International Systems and Software Product Line Conference-Volume A. 2017. ACM Press.</li>
+    <li>[4] Xhevahire Tërnava. 
+    <em>Handling variability at the code level: modeling, tracing and checking consistency.</em> PhD dissertation, 2017.</li>
+  </ul>

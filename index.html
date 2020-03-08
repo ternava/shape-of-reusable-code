@@ -36,8 +36,8 @@ permalink: /
 <section class="bs-docs-section">
   <h1 id="overview" class="page-header">Overview</h1>
 
-  Variability Modeling DSL (VML-DSL) is a domain specific language (DSL), realized in Scala language.
-  <!--In the following, it will be referred as VML-DSL. -->
+  Variability Modeling DSL (VM-DSL) is a domain specific language (DSL), realized in Scala language.
+  <!--In the following, it will be referred as VM-DSL. -->
   Here are presented its main language constructs and an illustrative example of usage.
 
   <!--<blockquote>
@@ -49,7 +49,7 @@ permalink: /
   <!--You can choose to take only the JAR of this language, and to use in your software product line.
   Or, to take its source, which comes with three illustrative software product lines. -->
     <p>The VM-DSL is available for download from <a href="https://github.com/ternava/Variability-CChecking">its Github repository</a>.  </p>
-    <!--<p>You can download the VML-DSL in one of these two options. </p>
+    <!--<p>You can download the VM-DSL in one of these two options. </p>
     <ul>
     <li>The JAR file: <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_01.jar</a> </li>
     <li>The source with SPL examples: <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_02.jar</a> </li>
@@ -68,7 +68,7 @@ permalink: /
 
   <h3 class="page-header3">Language concepts</h3>
 
-    By using the VML-DSL one can model the variability of code assets in a Java-based variability-rich system in terms of
+    By using the VM-DSL one can model the variability of code assets in a Java-based variability-rich system in terms of
     <code class="highlighter-blue">variation points</code> with
     <code class="highlighter-blue">variants</code> in a technical variability model
     <code class="highlighter-blue">tvm</code>. According to their definition:
@@ -96,14 +96,14 @@ permalink: /
        </li>
    </ul>
 
-  <h3 class="page-header3">Usage pattern</h3>
+  <h3 class="page-header3">Set up of VM-DSL</h3>
 
   <p>
-    The VML-DSL can be used to model the variability of a variability-rich system implemented in Java or Scala languages.
+    The VM-DSL can be used to model the variability of a variability-rich system implemented in Java or Scala languages.
     In the following is shown its usage for modeling the variability of an illustrative system implemented in Scala.
   </p>
 
-  <p>To set up the VML-DSL</p>
+  <p>To set up the VM-DSL</p>
   <ol>
     <li>Download the VM-DSL from <a href="https://github.com/ternava/Variability-CChecking">its repository</a> and add it in your project. </li>
       <!--<li>Add <a href="https://github.com/ternava/Variability-CChecking">DSL-variability-modeling_01.jar</a>
@@ -114,9 +114,11 @@ permalink: /
     <li>Then, for each subdomain of your choice, for example, for each package, you can create a new <em>tvm_x.scala</em> class to hold / model its variability.</li>
   </ol>
 
-  <p>Or, alternatively to steps 2 and 3, the VML-DSL can just be imported into the current scope, for example, package,
+  <p>Or, alternatively to steps 2 and 3, the VM-DSL can just be imported into the current scope, for example, package,
     file, or class, where variability needs to be separately abstracted within a <code class="highlighter-blue">tvm</code>. </p>
-  <p>Despite of the chosen way, here is the pattern for using the VML-DSL: </p>
+
+  <h3 class="page-header3">Usage pattern</h3>
+  <p>Here is a pattern for using the VM-DSL: </p>
 
 
 
@@ -147,87 +149,136 @@ permalink: /
           <binding time>     := <Compilation | Start up | Runtime | ...>
           <evolution>        := <Open | Close>-->
 
-<p>First, in the <em>tvm_x.scala</em> class you need to import the VML-DSL.
-The VML-DSL use the reflection in Scala to tag the variable assets in code, therefore you need to import reflection too.
-You may need to import also the subdomain, specifically the package, or class with variability (not shown here).
-Then,
-</p>
+ <p><b>Line 1: </b> First, a <em>tvm_x.scala</em> class is created.</p>           
+<p><b>Line 2: </b Then, in the <em>tvm_x.scala</em> class you need to import the VM-DSL. </p>
+<p><b>Line 3: </b> The VM-DSL use the reflection in Scala to tag the variable assets in code, therefore you need to import Scala reflection too. 
+  You may need to import also the subdomain, specifically the package, or class with variability (not shown here).</p>
+<p><b>Lines 4 and 5: </b> You need to create variation points and variants, respectively. First, you define them, by giving a name, and then you specify their type.</p>
+<p> The VM-DSL supports five types of variation points:</p>
+<p><code class="highlighter-red">VP</code> &nbsp;&nbsp;- Ordinary variation point,
+  <code class="highlighter-red">uVP</code> - Unimplemented variation point, 
+  <code class="highlighter-red">oVP</code> - Optional variation point, 
+  <code class="highlighter-red">tVP</code> - Technical variation point, 
+  <code class="highlighter-red">nVP</code> - Nested variation point.
+ </p>
 
-    <p><b>&lt vp_name &gt</b> and <b>&lt variant_name &gt</b> - You need to give names for variation points and
-        variants, respectively. </p>
-    <p><b>&lt vp_type &gt</b> - The VML-DSL supports five types of variation points: </p>
-    <ul>
-      <li><code class="highlighter-red">VP</code> &nbsp;&nbsp;- Ordinary variation point</li>
-      <li><code class="highlighter-red">uVP</code> - Unimplemented variation point</li>
-      <li><code class="highlighter-red">oVP</code> - Optional variation point</li>
-      <li><code class="highlighter-red">tVP</code> - Technical variation point</li>
-      <li><code class="highlighter-red">nVP</code> - Nested variation point</li>
-    </ul>
-    <p><b><code class="highlighter-red">Variant</code> construct</b>: The VML-DSL provides this construct for capturing
-        variants.</p>
+ <p>For abstracting variants, the VM-DSL provides the <code class="highlighter-red">Variant</code> construct</b>.</p>
 
-    <p><b>&lt tag to the variable asset &gt</b> - The VML-DSL has an <code>asset</code> construct where you can use the
-    reflection in scala to tag the varying <code>class</code>, <code>method</code>, or <code>field</code> in code assets. </p>
-
-    <p><b><code class="highlighter-red">fragment</code> construct</b>:
-        Then, you use the <code class="highlighter-red">fragment</code> to model the variability in terms
-      of the created <code class="highlighter-blue">variation points</code> and
-      <code class="highlighter-blue">variants</code> abstractions.</p>
+ <p>The VM-DSL has an <code>asset</code> construct where you can use the
+  reflection in Scala to tag the variability related <code>class</code>, <code>method</code>, or <code>field</code> in code assets.</p>
 
 
-    <p><b>&lt logical relation &gt</b> - There are available the four logical relations among the variants of a variation point: </p>
-              <ul>
-                  <li><code class="highlighter-red">mandatory</code></li>
-                  <li><code class="highlighter-red">optional</code></li>
-                  <li><code class="highlighter-red">alternative</code></li>
-                  <li><code class="highlighter-red">or</code></li>
-              </ul>
-    <p><b>&lt technique &gt</b> - The currently added techniques are (new techniques can be added and used): </p>
-              <ul>
-                  <li><code class="highlighter-red">inheritance</code></li>
-                  <li><code class="highlighter-red">overloading</code></li>
-                  <li><code class="highlighter-red">overriding</code></li>
-                  <li><code class="highlighter-red">strategy</code></li>
-                  <li><code class="highlighter-red">template</code></li>
-              </ul>
-    <p><b>&lt binding time &gt</b> - The supported binding times are: </p>
-              <ul>
-                  <li><code class="highlighter-red">compile_time</code></li>
-                  <li><code class="highlighter-red">runtime</code></li>
-              </ul>
-    <p><b>&lt evolution &gt</b> - There are possible two evolution properties: </p>
-              <ul>
-              <li><code class="highlighter-red">open</code></li>
-              <li><code class="highlighter-red">close</code></li>
-              </ul>
+  <p><b>Lines 6 to 10: </b> Then, you import and use the <code class="highlighter-red">fragment</code> construct to model the variability in terms
+    of the defined abstractions of <code class="highlighter-blue">variation points</code> and
+    <code class="highlighter-blue">variants</code>.</p> 
+  
+    <p>First, the logical relation among the variants of a variation point are modeled. 
+      For this, there are available four logical relations among the variants of a variation point: </p>
+      <p><code class="highlighter-red">mandatory</code>, 
+        <code class="highlighter-red">optional</code>, 
+        <code class="highlighter-red">alternative</code>, 
+        <code class="highlighter-red">or</code>.
+      </p>
+
+    <p>Secondly is abstracted the used technique to implement a variation point with its variants.
+      The current VM-DSL supports the five techniques (new techniques can be added and used too): </p>
+    <p><code class="highlighter-red">inheritance</code>, 
+      <code class="highlighter-red">overloading</code>, 
+      <code class="highlighter-red">overriding</code>, 
+      <code class="highlighter-red">strategy</code>,
+      <code class="highlighter-red">template</code>.
+    </p>  
+
+    <p>Thirdly, depending from the used technique, during the product derivation, variants can be bound at different times. 
+      The current VM-DSL supports two binding times:
+    </p>
+    <p><code class="highlighter-red">compile_time</code> and <code class="highlighter-red">runtime</code>.</p>
+
+    <p>Finally, a variation point can be open for evolution in the future or not, which property comes from the used technique. 
+      Therefore, VM-DSL has two possible evolution properties for a variation point: </p>
+      <p><code class="highlighter-red">open</code> and <code class="highlighter-red">close</code>.</p>
 
 
+      <p>These four steps are repeated for abstracting each variation point with its variants and modeling the variability of some code assets.</p>
     <h3 class="page-header3">Usage example</h3>
 
-    <p>Here is an example of them: </p>
+    <p>Here is an example of a variation point with three variants in code assets of a variability-rich system: </p>
 
   <!-- @formatter:off -->
   {% highlight scala %}
-  /* class tvm_x.scala */
-  package tvm
-  import dsl._
-  import SPL._
+  /* Class level variation point, vp_AbsLine2D */
+  public abstract class AbstractLine2D extends 
+    AbstractSmoothCurve2D implements 
+    SmoothOrientedCurve2D, 
+    LinearElement2D {
+
+      /* First variant of vp_distance */
+      public double distance(Point2D p) {
+        return distance(p.x(), p.y());
+      }
+      
+      /* Second variant of vp_distance */
+      public double distance(double x, double y) {
+          Point2D proj = projectedPoint(x, y);
+          if (contains(proj))
+              return proj.distance(x, y);
+          /* Omitted code */
+          return dist;
+      }
+    /* Omitted code */
+  }
   {% endhighlight %}
   <!-- @formatter:on -->
 
+  <!-- @formatter:off -->
+  {% highlight scala %}
+  /* First variant, v_Line2D, of vp_AbsLine2D */
+  public class StraightLine2D extends AbstractLine2D implements 
+    SmoothContour2D, Cloneable, CircleLine2D {
+	  /* Omitted code */
+  }
+  {% endhighlight %}
+  <!-- @formatter:on -->
 
+  <!-- @formatter:off -->
+  {% highlight scala %}
+  /* Second variant, v_Segment2D, of vp_AbsLine2D */
+  public class LineSegment2D extends 
+    AbstractLine2D implements Cloneable, CirculinearElement2D {
+	  /* Omitted code */
+  }
+  {% endhighlight %}
+  <!-- @formatter:on -->
 
-  <h1 id="bibliography" class="page-header">Bibliography</h1>
+  <!-- @formatter:off -->
+  {% highlight scala %}
+  /* Third variant, v_Ray2D, of vp_AbsLine2D */
+  public class Ray2D extends AbstractLine2D implements Cloneable {
+	  /* Omitted code */
+  }
+  {% endhighlight %}
+  <!-- @formatter:on -->
 
-  <ul>
-    <li>[1] Tërnava, Xh., & Collet, P. (2017, September).
-      <em>On the diversity of capturing variability at the implementation level.</em>
-      In the 21st International Systems and Software Product Line Conference-Volume B. ACM Press.</li>
-    <li>[2] Tërnava, Xh., & Collet, P. (2017, May). <em>Tracing imperfectly modular variability in software product line
-      implementation.</em> In International Conference on Software Reuse (pp. 112-120). Springer, Cham. </li>
-  </ul>
+  <p>The variability of these code assets is modeled as in the following:</p>
 
-
-
-
+  <!-- @formatter:off -->
+  {% highlight scala %}
+  /* tvm_line.java*/
+  package tvm  // For example, all TVMs are kept within a package
+  import dsl._
+  import scala.reflect.runtime.universe._
+  
+  val vp_AbsLine2D   = VP(asset(typeOf[AbstractLine2D].typeSymbol))
+  val v_Line2D       = Variant(asset(typeOf[StraightLine2D].typeSymbol))
+  val v_Segment2D    = Variant(asset(typeOf[LineSegment2D].typeSymbol))
+  val v_Ray2D        = Variant(asset(typeOf[Ray2D].typeSymbol))  
+  
+  import fragment._
+  fragment("geom2D.line") {
+    vp_AbsLine2D is ALT with_variants (v_Line2D, v_Segment2D, v_Ray2D) use
+    INHERITANCE with_binding RUN_TIME and_evolution OPEN
+  }
+  {% endhighlight %}
+  <!-- @formatter:on -->
+  
   </section>
