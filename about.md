@@ -54,7 +54,7 @@ The VM-DSL language syntax for defining trace links between variation points and
 <vp-name> | <variant-name> | <feature-name> := "string name"
 ```
 
-
+The manuscript with diff: [here](assets/files/manuscript-diff.pdf).
 
 ### Bibliography
 
